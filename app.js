@@ -20,6 +20,9 @@ app.use(logger("dev"));
 app.use(cors());
 app.use(cookieParser());
 
+// Mount the Routes
+app.use("/", routes);
+
 // This is to check if the service is online or not
 app.use("/", function (req, res) {
   res.json({
@@ -30,9 +33,6 @@ app.use("/", function (req, res) {
   });
   res.end();
 });
-
-// Mount the Routes
-app.use("/", routes);
 
 app.use(errorHandler);
 

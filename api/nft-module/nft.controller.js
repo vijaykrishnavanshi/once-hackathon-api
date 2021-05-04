@@ -38,7 +38,7 @@ _nft.getHash = async function (payloadData) {
   console.log(payloadData);
   return {
     ethHash: bguizErc20ExampleTokenTxList.map((elem) => elem.txHash),
-    rskHash: bguizErc721ExampleTokenTxList.map((elem) => elem.rskHash),
+    rskHash: bguizErc721ExampleTokenTxList.map((elem) => elem.txHash),
   };
 };
 
