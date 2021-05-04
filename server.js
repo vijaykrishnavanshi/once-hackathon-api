@@ -10,8 +10,8 @@ const app = require("./app"); // Recieved an express app instance
 dotenv.config();
 
 // Here you set the PORT and IP of the server
-const port = process.env.PORT || 8001;
-const ip = process.env.IP || "127.0.0.1";
+const port = process.env.PORT || 5000;
+const ip = process.env.IP || "0.0.0.0";
 
 app.listen(port, ip, function (error) {
   if (error) {

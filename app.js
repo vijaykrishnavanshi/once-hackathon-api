@@ -20,6 +20,17 @@ app.use(logger("dev"));
 app.use(cors());
 app.use(cookieParser());
 
+// This is to check if the service is online or not
+app.use("/", function (req, res) {
+  res.json({
+    endpoints: [
+      { method: "POST", route: "/get-hash" },
+      { method: "POST", route: "/carbon-intesity" },
+    ],
+  });
+  res.end();
+});
+
 // Mount the Routes
 app.use("/", routes);
 
