@@ -1,19 +1,20 @@
 const axios = require("axios");
-
+const dotenv = require("dotenv");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const Web3 = require("web3");
 
+dotenv.config();
+
 const energyData = require("./energy-data.json");
 
-const mnemonicSeedPhrase = process.env.MNEMONIC || "";
-const infuraProjectId = process.env.INFURA_PROJECT_ID || "";
+const accountPrivateKey = process.env.ONCE_HACKATHON_WALLET_PRIVATE_KEY || "";
+
+const infuraProjectId = process.env.ONCE_HACKATHON_INFURA_PROJECT_ID || "";
 
 function initialiseRskTestnet() {
   return new HDWalletProvider({
-    mnemonic: {
-      phrase: mnemonicSeedPhrase,
-    },
-    providerOrUrl: "https://public-node.testnet.rsk.co/",
+    privateKeys: [accountPrivateKey],
+    providerOrUrl: process.env.RSK_TESTNET_PROVIDER,
     derivationPath: "m/44'/37310'/0'/0/",
     // Higher polling interval to check for blocks less frequently
     pollingInterval: 15e3,
@@ -22,10 +23,8 @@ function initialiseRskTestnet() {
 
 function initialiseRskMainnet() {
   return new HDWalletProvider({
-    mnemonic: {
-      phrase: mnemonicSeedPhrase,
-    },
-    providerOrUrl: "https://public-node.rsk.co/",
+    privateKeys: [accountPrivateKey],
+    providerOrUrl: process.env.RSK_MAINNET_PROVIDER,
     derivationPath: "m/44'/137'/0'/0/",
     // Higher polling interval to check for blocks less frequently
     pollingInterval: 15e3,
@@ -34,9 +33,7 @@ function initialiseRskMainnet() {
 
 function initialiseEthTestnet() {
   return new HDWalletProvider({
-    mnemonic: {
-      phrase: mnemonicSeedPhrase,
-    },
+    privateKeys: [accountPrivateKey],
     providerOrUrl: `https://kovan.infura.io/v3/${infuraProjectId}`,
     derivationPath: "m/44'/60'/0'/0/",
     // Higher polling interval to check for blocks less frequently
@@ -46,9 +43,7 @@ function initialiseEthTestnet() {
 
 function initialiseEthMainnet() {
   return new HDWalletProvider({
-    mnemonic: {
-      phrase: mnemonicSeedPhrase,
-    },
+    privateKeys: [accountPrivateKey],
     providerOrUrl: `https://mainnet.infura.io/v3/${infuraProjectId}`,
     derivationPath: "m/44'/60'/0'/0/",
     // Higher polling interval to check for blocks less frequently
@@ -120,7 +115,7 @@ async function calculateCarbon({
   networkEnergyConsumption, // kWh
   networkAverageGasPerDay, // Gwei
 }) {
-  toBN = web3InstanceTestnet.utils.toBN;
+  const toBN = web3InstanceTestnet.utils.toBN;
   return toBN(gasUsed)
     .mul(toBN(Math.floor(carbonEnergyIntensity * 10e3)))
     .mul(toBN(Math.floor(networkEnergyConsumption * 10e3)))

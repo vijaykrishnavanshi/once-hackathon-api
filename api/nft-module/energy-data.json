@@ -1,0 +1,17 @@
+{
+    "energyProfiles": {
+        "cn": {
+            "carbonEnergyIntensity": 1000
+        }
+    },
+    "networkProfiles": {
+        "rsk": {
+            "networkEnergyConsumption": 100,
+            "networkAverageGasPerDay": 100
+        },
+        "eth": {
+            "networkEnergyConsumption": 100,
+            "networkAverageGasPerDay": 100
+        }
+    }
+}
