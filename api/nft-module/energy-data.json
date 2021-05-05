@@ -9,7 +9,7 @@
             "networkEnergyConsumption": 100,
             "networkAverageGasPerDay": 100
         },
-        "eth": {
+        "ethereum": {
             "networkEnergyConsumption": 100,
             "networkAverageGasPerDay": 100
         }
