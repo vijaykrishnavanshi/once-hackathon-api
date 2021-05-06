@@ -198,7 +198,7 @@ async function getCompleteTxProfile(networkConfig, transaction) {
 
 const _util = {};
 
-_util.calculateCarbonIntensityForTransaction = async function calculateCarbonIntensityForTransaction(
+_util.calculateCarbonCostForTransaction = async function calculateCarbonCostForTransaction(
   energyProfile,
   transaction
 ) {
