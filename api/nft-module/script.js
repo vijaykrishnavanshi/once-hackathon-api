@@ -1,5 +1,3 @@
-/* eslint-disable security/detect-object-injection */
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const axios = require("axios");
 const dotenv = require("dotenv");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
@@ -12,6 +10,26 @@ const energyData = require("./energy-data.json");
 const accountPrivateKey = process.env.ONCE_HACKATHON_WALLET_PRIVATE_KEY || "";
 
 const infuraProjectId = process.env.ONCE_HACKATHON_INFURA_PROJECT_ID || "";
+
+function initialiseRskTestnet() {
+  return new HDWalletProvider({
+    privateKeys: [accountPrivateKey],
+    providerOrUrl: process.env.RSK_TESTNET_PROVIDER,
+    derivationPath: "m/44'/37310'/0'/0/",
+    // Higher polling interval to check for blocks less frequently
+    pollingInterval: 15e3,
+  });
+}
+
+function initialiseRskMainnet() {
+  return new HDWalletProvider({
+    privateKeys: [accountPrivateKey],
+    providerOrUrl: process.env.RSK_MAINNET_PROVIDER,
+    derivationPath: "m/44'/137'/0'/0/",
+    // Higher polling interval to check for blocks less frequently
+    pollingInterval: 15e3,
+  });
+}
 
 function initialiseEthTestnet() {
   return new HDWalletProvider({
@@ -148,86 +166,134 @@ async function init(item) {
   };
 }
 
-async function getCompleteTxProfile(networkConfig, transaction) {
-  const {
-    web3InstanceTestnet,
-    network,
-    coinPrice,
-    gasPrice,
-    decimalPoints,
-    energyData,
-  } = networkConfig;
-  const { description, address, txHash } = transaction;
-  const gasUsed = await getGasUsedForTx({ web3InstanceTestnet, txHash });
-  const fees = calculateFees({
-    web3InstanceTestnet,
-    gasUsed,
-    gasPrice,
-    coinPrice,
-    decimalPoints,
-  });
-  const { cryptoFee, fiatFee } = fees;
+async function performComparisonOfTxFee(list, txList) {
+  const promises = list.map(async (item, idx) => {
+    const {
+      web3InstanceTestnet,
+      network,
+      coinPrice,
+      gasPrice,
+      decimalPoints,
+      energyData,
+    } = item;
+    const { description, address, txHash } = txList[idx];
+    const gasUsed = await getGasUsedForTx({ web3InstanceTestnet, txHash });
+    const fees = calculateFees({
+      web3InstanceTestnet,
+      gasUsed,
+      gasPrice,
+      coinPrice,
+      decimalPoints,
+    });
+    const { cryptoFee, fiatFee } = fees;
 
-  const {
-    carbonEnergyIntensity,
-    networkEnergyConsumption,
-    networkAverageGasPerDay,
-  } = energyData;
-  const carbon = await calculateCarbon({
-    web3InstanceTestnet,
-    gasUsed,
-    carbonEnergyIntensity,
-    networkEnergyConsumption,
-    networkAverageGasPerDay,
-  });
+    const {
+      carbonEnergyIntensity,
+      networkEnergyConsumption,
+      networkAverageGasPerDay,
+    } = energyData;
+    const carbon = await calculateCarbon({
+      web3InstanceTestnet,
+      gasUsed,
+      carbonEnergyIntensity,
+      networkEnergyConsumption,
+      networkAverageGasPerDay,
+    });
 
-  return {
-    network,
-    description,
-    coinPrice,
-    gasPrice,
-    address,
-    txHash,
-    gasUsed,
-    cryptoFee,
-    fiatFee,
-    carbonEnergyIntensity,
-    carbon,
-  };
+    return {
+      network,
+      description,
+      coinPrice,
+      gasPrice,
+      address,
+      txHash,
+      gasUsed,
+      cryptoFee,
+      fiatFee,
+      carbonEnergyIntensity,
+      carbon,
+    };
+  });
+  const results = await Promise.all(promises);
+  return results;
 }
 
-const _util = {};
+async function performComparison() {
+  let list = [
+    {
+      network: "ethereum",
+      web3ProviderTestnet: initialiseEthTestnet(),
+      web3ProviderMainnet: initialiseEthMainnet(),
+      coinSymbol: "ETH",
+      fiatSymbol: "USD",
+      decimalPoints: 18,
+      energyProfileId: "cn",
+    },
+  ].map((item) => {
+    const web3InstanceTestnet = new Web3(item.web3ProviderTestnet);
+    const web3InstanceMainnet = new Web3(item.web3ProviderMainnet);
+    return {
+      ...item,
+      web3InstanceTestnet,
+      web3InstanceMainnet,
+    };
+  });
 
-_util.calculateCarbonIntensityForTransaction = async function calculateCarbonIntensityForTransaction(
-  energyProfile,
-  transaction
-) {
-  const networkConfig = {
-    network: "ethereum",
-    web3ProviderTestnet: initialiseEthTestnet(),
-    web3ProviderMainnet: initialiseEthMainnet(),
-    coinSymbol: "ETH",
-    fiatSymbol: "USD",
-    decimalPoints: 18,
-    energyProfileId: energyProfile,
-  };
-  networkConfig.web3InstanceTestnet = new Web3(
-    networkConfig.web3ProviderTestnet
-  );
-  networkConfig.web3InstanceMainnet = new Web3(
-    networkConfig.web3ProviderMainnet
-  );
-  const initialisedNetworkConfig = await init(networkConfig);
-  const completeNetworkConfig = {
-    ...networkConfig,
-    ...initialisedNetworkConfig,
-  };
-  const feeResult = await getCompleteTxProfile(
-    completeNetworkConfig,
-    transaction
-  );
-  await cleanUp(completeNetworkConfig);
-  return feeResult.carbonEnergyIntensity;
-};
+  const initPromises = list.map(init);
+  const initResults = await Promise.all(initPromises);
+  list = list.map((item, idx) => {
+    const initResult = initResults[idx];
+    return {
+      ...item,
+      ...initResult,
+    };
+  });
 
-module.exports = _util;
+  const bguizErc20ExampleTokenTxDesc =
+    "ERC20 Example Token Deployment Transaction";
+  const bguizErc20ExampleTokenTxList = [
+    {
+      description: bguizErc20ExampleTokenTxDesc,
+      address: "0x89B110E7e17a62bf5D13009f9D500555611Cb4cD",
+      txHash:
+        "0x112dc1cd0a6c50aae90bcb37f0377b510ede046dffb1e18cb32d33a6a4ab2710",
+    },
+    {
+      description: bguizErc20ExampleTokenTxDesc,
+      address: "0x83075fa1a90821ccc89eafc5a149c2b906f3d820",
+      txHash:
+        "0xcb9067289d116059c81141840edb643f689ffa3c34767aa608fff8b919dec259",
+    },
+  ];
+  const bguizErc20ExampleTokenTxFeeResults = await performComparisonOfTxFee(
+    list,
+    bguizErc20ExampleTokenTxList
+  );
+  console.log(bguizErc20ExampleTokenTxFeeResults);
+
+  const bguizErc721ExampleTokenTxDesc =
+    "ERC721 Example Token Deployment Transaction";
+  const bguizErc721ExampleTokenTxList = [
+    {
+      description: bguizErc721ExampleTokenTxDesc,
+      address: "0xc2E29C80a5BDD4785AD520EBE92e53F9BdA8dF0b",
+      txHash:
+        "0x0bbaf7f86191c3c0461b5ee99508abcfc6c5067c3a82e43f8dcc2efd792cf070",
+    },
+    {
+      description: bguizErc721ExampleTokenTxDesc,
+      address: "0xb78615d79cf590588c055319f96617c842040db9",
+      txHash:
+        "0xc886a1475f07fdf3566c60e27f28c1dcecf3562a493ba28b1071cfe202385267",
+    },
+  ];
+  const bguizErc721ExampleTokenTxFeeResults = await performComparisonOfTxFee(
+    list,
+    bguizErc721ExampleTokenTxList
+  );
+  console.log(bguizErc721ExampleTokenTxFeeResults);
+
+  list.forEach(cleanUp);
+}
+
+performComparison();

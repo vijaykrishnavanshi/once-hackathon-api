@@ -1,17 +1,45 @@
 {
     "energyProfiles": {
-        "cn": {
-            "carbonEnergyIntensity": 1000
-        }
+      "cn": {
+        "desc": "China (PRC) (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 555.0
+      },
+      "in": {
+        "desc": "India (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 708.0
+      },
+      "sg": {
+        "desc": "Singapore (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 418.8
+      },
+      "au": {
+        "desc": "Australia (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 880.0
+      },
+      "us": {
+        "desc": "United States (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 453.22
+      },
+      "uk": {
+        "desc": "United Kingdom (2019) gC02e/kWh",
+        "carbonEnergyIntensity": 347.5
+      },
+      "worldAverage": {
+        "desc": "World Average (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 555.0
+      }
     },
     "networkProfiles": {
-        "rsk": {
-            "networkEnergyConsumption": 100,
-            "networkAverageGasPerDay": 100
-        },
-        "ethereum": {
-            "networkEnergyConsumption": 100,
-            "networkAverageGasPerDay": 100
-        }
+      "ethereum": {
+        "desc": "Ethereum (actual) (2021/04/30) kWh",
+        "networkEnergyConsumption": 40708.4,
+        "networkAverageGasPerDay": 95.2885738
+      },
+      "rsk": {
+        "desc": "RSK (inaccurate) (2021/04/30) kWh",
+        "networkEnergyConsumption": 400,
+        "networkAverageGasPerDay": 100
+      }
     }
-}
+  }
+  
