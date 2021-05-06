@@ -227,7 +227,7 @@ _util.calculateCarbonIntensityForTransaction = async function calculateCarbonInt
     transaction
   );
   await cleanUp(completeNetworkConfig);
-  return feeResult.carbonEnergyIntensity;
+  return feeResult.carbon;
 };
 
 module.exports = _util;
