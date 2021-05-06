@@ -27,6 +27,18 @@
       "worldAverage": {
         "desc": "World Average (2018) gC02e/kWh",
         "carbonEnergyIntensity": 555.0
+      },
+      "fossil80Renewable20": {
+        "desc": "80% Fossil and 20% Renewable (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 555.0
+      },
+      "fossil50Renewable50": {
+        "desc": "50% Fossil and 50% Renewable (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 555.0
+      },
+      "fossil20Renewable80": {
+        "desc": "20% Fossil and 80% Renewable (2018) gC02e/kWh",
+        "carbonEnergyIntensity": 555.0
       }
     },
     "networkProfiles": {
