@@ -12,33 +12,6 @@ const erc721ExampleTokenTxDesc = "ERC721 Example Token Deployment Transaction";
 
 const tokenTxList = [
   {
-    name: "Rare NFT",
-    network: "ethereum",
-    description: erc721ExampleTokenTxDesc,
-    address: "0xb78615d79cf590588c055319f96617c842040db9",
-    txHash:
-      "0xc886a1475f07fdf3566c60e27f28c1dcecf3562a493ba28b1071cfe202385267",
-    type: transactionType.NFT_DEPLOY,
-  },
-  {
-    name: "Rare NFT",
-    network: "ethereum",
-    description: erc721ExampleTokenTxDesc,
-    address: "0xb78615d79cf590588c055319f96617c842040db9",
-    txHash:
-      "0xc886a1475f07fdf3566c60e27f28c1dcecf3562a493ba28b1071cfe202385267",
-    type: transactionType.NFT_MINT,
-  },
-  {
-    name: "Rare NFT",
-    network: "ethereum",
-    description: erc721ExampleTokenTxDesc,
-    address: "0xb78615d79cf590588c055319f96617c842040db9",
-    txHash:
-      "0xc886a1475f07fdf3566c60e27f28c1dcecf3562a493ba28b1071cfe202385267",
-    type: transactionType.NFT_TRANSFER,
-  },
-  {
     name: "Mypt NFT",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
@@ -123,12 +96,6 @@ const tokenTxList = [
 
 const tokenList = [
   {
-    name: "Rare NFT",
-    network: "ethereum",
-    description: erc721ExampleTokenTxDesc,
-    address: "0xb78615d79cf590588c055319f96617c842040db9",
-  },
-  {
     name: "Mypt NFT",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
@@ -138,13 +105,13 @@ const tokenList = [
     name: "CryptoCoins",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
-    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    address: "0x947b394383ee3e45b380257bf01f112bb25372cb",
   },
   {
     name: "KCompound",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
-    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    address: "0x64dfA6c1216bA48CC665a4B603Cf221CE9Ca901b",
   },
 ];
 
