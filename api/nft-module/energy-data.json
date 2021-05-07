@@ -8,6 +8,7 @@
         "sources": [
           "https://www.iea.org/reports/global-energy-co2-status-report-2019/emissions"
         ],
+        "ratio": { "coal": 72, "gas": 21, "renewable": 1, "oil": 6 },
         "carbonEnergyIntensity": 475.0
       },
       "coal": {
@@ -56,7 +57,8 @@
         "year": "Not Applicable",
         "unit": "gC02e/kWh",
         "sources": ["coal", "oil", "gas", "renewables"],
-        "carbonEnergyIntensity": 531.1
+        "ratio": { "coal": 57, "gas": 17, "renewable": 20, "oil": 6 },
+        "carbonEnergyIntensity": 620.4
       },
       "fossil50Renewable50": {
         "name": "50% Fossil and 50% Renewable - gC02e/kWh",
@@ -64,7 +66,8 @@
         "year": "Not Applicable",
         "unit": "gC02e/kWh",
         "sources": ["coal", "oil", "gas", "renewables"],
-        "carbonEnergyIntensity": 336.25
+        "ratio": { "coal": 36, "gas": 11, "renewable": 50, "oil": 3 },
+        "carbonEnergyIntensity": 392.1
       },
       "fossil20Renewable80": {
         "name": "20% Fossil and 80% Renewable - gC02e/kWh",
@@ -72,7 +75,8 @@
         "year": "Not Applicable",
         "unit": "gC02e/kWh",
         "sources": ["coal", "oil", "gas", "renewables"],
-        "carbonEnergyIntensity": 141.4
+        "ratio": { "coal": 15, "gas": 4, "renewable": 80, "oil": 1 },
+        "carbonEnergyIntensity": 163.73
       }
     },
     "networkProfiles": {
