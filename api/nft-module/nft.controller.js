@@ -65,6 +65,60 @@ const tokenTxList = [
       "0x0cf5583f933c4cd21e4f0532a9abed288747e44e8aa2482dfa9d0f05ef6f3d28",
     type: transactionType.NFT_TRANSFER,
   },
+  {
+    name: "GyroNFT",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0xd71837c583607caa4e7ee93ce3eec9f8aa2dc2dd79db5a557250faf641ce8769",
+    type: transactionType.NFT_DEPLOY,
+  },
+  {
+    name: "GyroNFT",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0xc6edd87683c28d070db12cdf19bbf190737b53bac3db51eb7a32c6771a08f922",
+    type: transactionType.NFT_MINT,
+  },
+  {
+    name: "GyroNFT",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0x0cf5583f933c4cd21e4f0532a9abed288747e44e8aa2482dfa9d0f05ef6f3d28",
+    type: transactionType.NFT_TRANSFER,
+  },
+  {
+    name: "Uniswap V3",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0xd71837c583607caa4e7ee93ce3eec9f8aa2dc2dd79db5a557250faf641ce8769",
+    type: transactionType.NFT_DEPLOY,
+  },
+  {
+    name: "Uniswap V3",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0xc6edd87683c28d070db12cdf19bbf190737b53bac3db51eb7a32c6771a08f922",
+    type: transactionType.NFT_MINT,
+  },
+  {
+    name: "Uniswap V3",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+    txHash:
+      "0x0cf5583f933c4cd21e4f0532a9abed288747e44e8aa2482dfa9d0f05ef6f3d28",
+    type: transactionType.NFT_TRANSFER,
+  },
 ];
 
 const tokenList = [
@@ -76,6 +130,18 @@ const tokenList = [
   },
   {
     name: "Mypt NFT",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+  },
+  {
+    name: "GyroNFT",
+    network: "ethereum",
+    description: erc721ExampleTokenTxDesc,
+    address: "0x71bb16e970db47fd0252856b17642972a81388b2",
+  },
+  {
+    name: "Uniswap V3",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
     address: "0x71bb16e970db47fd0252856b17642972a81388b2",
