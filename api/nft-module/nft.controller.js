@@ -135,13 +135,13 @@ const tokenList = [
     address: "0x71bb16e970db47fd0252856b17642972a81388b2",
   },
   {
-    name: "GyroNFT",
+    name: "CryptoCoins",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
     address: "0x71bb16e970db47fd0252856b17642972a81388b2",
   },
   {
-    name: "Uniswap V3",
+    name: "KCompound",
     network: "ethereum",
     description: erc721ExampleTokenTxDesc,
     address: "0x71bb16e970db47fd0252856b17642972a81388b2",
