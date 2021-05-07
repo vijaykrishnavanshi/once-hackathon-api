@@ -90,7 +90,7 @@ _nft.getHash = async function () {
   };
 };
 
-_nft.calculateCarbonIntensity = async function (payloadData) {
+_nft.calculateCarbonCost = async function (payloadData) {
   const transactions = tokenTxList.filter(
     (elem) => elem.name === payloadData.nftName
   );

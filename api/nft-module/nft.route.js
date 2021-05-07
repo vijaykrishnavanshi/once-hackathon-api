@@ -24,7 +24,18 @@ router.route("/get-hash").post(
 router.route("/carbon-intesity").post(
   asyncHandler(async (req, res) => {
     // send only the data that is required by the controller
-    const data = await NFTController.calculateCarbonIntensity(req.body);
+    const data = await NFTController.calculateCarbonCost(req.body);
+    const response = {};
+    response.statusCode = 200;
+    response.data = data;
+    return responseHandler(res, response);
+  })
+);
+
+router.route("/carbon-cost").post(
+  asyncHandler(async (req, res) => {
+    // send only the data that is required by the controller
+    const data = await NFTController.calculateCarbonCost(req.body);
     const response = {};
     response.statusCode = 200;
     response.data = data;
